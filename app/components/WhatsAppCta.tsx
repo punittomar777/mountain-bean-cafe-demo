@@ -1,6 +1,6 @@
 import Button from "./ui/Button";
 import { WhatsAppIcon } from "./ui/BrandIcons";
-import { whatsappUrl } from "../lib/content";
+import { demo, whatsappUrl } from "../lib/content";
 
 export default function WhatsAppCta() {
   return (
@@ -17,12 +17,12 @@ export default function WhatsAppCta() {
                 id="whatsapp-heading"
                 className="display text-3xl text-white sm:text-4xl"
               >
-                Planning a visit? Let&apos;s talk.
+                Want a website like this? Let&apos;s talk.
               </h2>
               <p className="mt-4 leading-relaxed text-white/75">
-                Have a question about the menu, reservations or private
-                gatherings? Message us on WhatsApp and we&apos;ll get right back to
-                you.
+                This WhatsApp chat is live and goes straight to {demo.author},
+                the developer who designed and built this demo. Ask about a site
+                for your own café or restaurant.
               </p>
             </div>
             <Button

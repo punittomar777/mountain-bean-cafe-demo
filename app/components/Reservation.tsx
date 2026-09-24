@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, Loader2, AlertCircle, CalendarCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
+  CalendarCheck,
+  Info,
+} from "lucide-react";
 import Button from "./ui/Button";
 import SectionHeading from "./ui/SectionHeading";
 import { WhatsAppIcon } from "./ui/BrandIcons";
-import { guestOptions, timeSlots, whatsappUrl } from "../lib/content";
+import { demo, guestOptions, timeSlots, whatsappUrl } from "../lib/content";
 
 interface FormState {
   name: string;
@@ -147,12 +153,19 @@ export default function Reservation() {
           id="reservation-heading"
           eyebrow="Reservations & enquiries"
           title="Save your spot."
-          description="Tell us when you're coming and how many, and we'll confirm by email or phone within a few hours. For same-day tables, a quick WhatsApp is fastest."
+          description="Try the reservation form below — it's fully working. Because this is a demo, requests are emailed to the developer, not a restaurant, and no real table is booked."
         />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           {/* Form */}
           <div className="rounded-3xl border border-border bg-surface-2 p-6 sm:p-8">
+            <p className="mb-6 flex items-start gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm text-muted">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+              <span>
+                This is a demo website. Reservation enquiries are sent directly
+                to the developer, {demo.author}.
+              </span>
+            </p>
             {submitted ? (
               <div
                 role="status"
@@ -160,11 +173,14 @@ export default function Reservation() {
               >
                 <CheckCircle2 className="h-10 w-10 text-accent" aria-hidden />
                 <h3 className="font-display text-2xl font-semibold text-foreground">
-                  Reservation request sent
+                  Demo enquiry sent
                 </h3>
                 <p className="text-muted">
-                  Thanks! Your reservation request has been sent. We&apos;ll get
-                  back to you shortly. Need it sooner? Message us on WhatsApp.
+                  Thanks! This was a demo enquiry — no actual restaurant
+                  reservation has been created. Mountain Bean Café is a
+                  fictional restaurant, and your details were emailed only to{" "}
+                  {demo.author}, the developer of this demo. Questions? Chat on
+                  WhatsApp.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button
@@ -367,7 +383,7 @@ export default function Reservation() {
                 </Button>
 
                 <p className="text-center text-xs text-subtle">
-                  We&apos;ll only use your details to confirm this reservation.
+                  Your details are only used to reply to this enquiry.
                 </p>
               </form>
             )}
@@ -385,15 +401,18 @@ export default function Reservation() {
               <ol className="mt-4 space-y-3 text-sm text-muted">
                 <li className="flex gap-3">
                   <span className="font-display font-semibold text-accent">1.</span>
-                  Send your preferred date, time and party size.
+                  Pick a date, time and party size — the form checks your
+                  details as you go.
                 </li>
                 <li className="flex gap-3">
                   <span className="font-display font-semibold text-accent">2.</span>
-                  We check the book and confirm by email or phone.
+                  Your request is emailed instantly, formatted and ready to
+                  reply to.
                 </li>
                 <li className="flex gap-3">
                   <span className="font-display font-semibold text-accent">3.</span>
-                  Turn up, settle in and we&apos;ll take it from there.
+                  In this demo it goes to {demo.author}; on a live site it
+                  would go to the restaurant&apos;s inbox.
                 </li>
               </ol>
             </div>
@@ -403,8 +422,8 @@ export default function Reservation() {
                 Prefer to chat?
               </p>
               <p className="mt-1 text-sm text-muted">
-                Message us on WhatsApp for same-day tables, large groups or private
-                gatherings.
+                WhatsApp goes directly to {demo.author} — ask about this demo or a
+                website for your own café or restaurant.
               </p>
               <Button
                 href={whatsappUrl}

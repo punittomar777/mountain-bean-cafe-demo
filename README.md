@@ -37,14 +37,19 @@ Secrets are read only in the Node.js route handler and never reach the browser.
 
 Almost everything lives in [`app/lib/content.ts`](app/lib/content.ts):
 
-- **Brand, tagline, `siteUrl`** — names and canonical domain.
-- **`whatsapp`** — replace `number` / `display` with the client's WhatsApp number.
+- **Brand, tagline, `siteUrl`** — names and canonical domain (used by metadata,
+  `sitemap.xml` and `robots.txt`).
+- **`demo`** — portfolio credit used by the demo notices; remove the notices for
+  a real client.
+- **`whatsapp`, `contactDetails`** — replace with the client's number and email.
 - **`menu`, `gallery`, `reviews`, `features`, `openingHours`, `location`** — copy,
-  images and details.
+  images and details. Add the real address and a "Get Directions" link to
+  `location` / [`Location.tsx`](app/components/Location.tsx).
 
 Swap the Unsplash image URLs for the client's own photography, update the metadata
-in [`app/layout.tsx`](app/layout.tsx) and the JSON-LD in
-[`app/components/StructuredData.tsx`](app/components/StructuredData.tsx).
+in [`app/layout.tsx`](app/layout.tsx) and replace the demo `WebSite` JSON-LD in
+[`app/components/StructuredData.tsx`](app/components/StructuredData.tsx) with a
+`Restaurant` schema using the client's real address and hours.
 
 ## Scripts
 
@@ -57,4 +62,6 @@ npm run lint    # eslint
 
 ---
 
-Demo project — testimonials, contact details and imagery are fictional / placeholder.
+Demo project, live at <https://cafe-demo.punittomar.com> — Mountain Bean Café is
+a fictional restaurant. Testimonials, hours and imagery are placeholder; enquiries
+reach the developer, [Punit Tomar](https://studio.punittomar.com).

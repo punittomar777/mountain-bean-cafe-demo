@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { siteUrl } from "../../lib/content";
 
 // Runs on the Node.js runtime (default for route handlers) — never in the browser,
 // so secrets read here are never exposed to the client. Vercel-compatible.
@@ -136,7 +137,9 @@ export async function POST(request: Request) {
     timeZone: "Asia/Kolkata",
   }).format(new Date());
 
-  const subject = "New Reservation Enquiry — Mountain Bean Café";
+  // This is a portfolio demo — flag the email so it's never mistaken for a
+  // real booking at a real restaurant.
+  const subject = "[Demo] New Reservation Enquiry — Mountain Bean Café";
 
   const lines = [
     ["Name", name],
@@ -147,6 +150,7 @@ export async function POST(request: Request) {
     ["Number of Guests", guests],
     ["Message", message || "—"],
     ["Submitted", `${submittedAt} (IST)`],
+    ["Source", `${siteUrl} (restaurant website demo — no real booking)`],
   ] as const;
 
   const text = lines.map(([label, value]) => `${label}: ${value}`).join("\n");

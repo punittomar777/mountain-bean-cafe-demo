@@ -3,7 +3,7 @@ import {
   Coffee,
   Croissant,
   Heart,
-  MapPin,
+  Wifi,
   Phone,
   Mail,
   Clock,
@@ -28,7 +28,17 @@ export const brand = {
 } as const;
 
 // Canonical/production URL — replace with the client's real domain on deploy.
-export const siteUrl = "https://mountainbeancafe.example.com";
+export const siteUrl = "https://cafe-demo.punittomar.com";
+
+/*
+ * This site is a portfolio demo — Mountain Bean Café is a fictional restaurant.
+ * Used for the demo notices, metadata and structured data.
+ */
+export const demo = {
+  author: "Punit Tomar",
+  authorUrl: "https://punittomar.com",
+  portfolioUrl: "https://studio.punittomar.com",
+} as const;
 
 /*
  * WhatsApp click-to-chat.
@@ -39,7 +49,7 @@ export const whatsapp = {
   number: "917465945752",
   display: "+91 74659 45752",
   message:
-    "Hi Mountain Bean Café! I'd like to know more about your menu and reservations.",
+    "Hi Punit! I saw the Mountain Bean Café demo website and I'd like to know more.",
 } as const;
 
 export const whatsappUrl = `https://wa.me/${whatsapp.number}?text=${encodeURIComponent(
@@ -332,10 +342,10 @@ export const features: Feature[] = [
       "A relaxed space for conversations, quiet mornings or an afternoon of work.",
   },
   {
-    icon: MapPin,
-    title: "Easy to reach",
+    icon: Wifi,
+    title: "Stay awhile",
     description:
-      "A convenient spot on Pine View Road with parking and transport close by.",
+      "Wi-Fi, plug points and no rush to leave — made for long lunches and laptops.",
   },
 ];
 
@@ -414,17 +424,17 @@ export const timeSlots: string[] = [
 /* Location + contact                                                  */
 /* ------------------------------------------------------------------ */
 
+/*
+ * The café is fictional, so there is no street address, coordinates or
+ * directions link. The map shows the area that inspired the demo only.
+ * For a real client, add their address and a "Get Directions" link here.
+ */
 export const location = {
   name: brand.full,
-  addressLines: ["24 Pine View Road", "Landour, Mussoorie", "Uttarakhand 248179, India"],
-  // Used for the map embed + "Get Directions"
+  area: "Landour, Mussoorie",
+  // Used for the map embed
   mapQuery: "Landour, Mussoorie, Uttarakhand",
-  geo: { latitude: 30.4599, longitude: 78.0919 },
 } as const;
-
-export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-  location.mapQuery
-)}`;
 
 export const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(
   location.mapQuery
@@ -437,13 +447,8 @@ export interface ContactItem {
   href?: string;
 }
 
+// Demo contact details reach the developer, not a café.
 export const contactDetails: ContactItem[] = [
-  {
-    icon: MapPin,
-    label: "Address",
-    value: "24 Pine View Road, Landour, Mussoorie",
-    href: directionsUrl,
-  },
   {
     icon: Phone,
     label: "Phone",
@@ -453,8 +458,8 @@ export const contactDetails: ContactItem[] = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@mountainbeancafe.com",
-    href: "mailto:hello@mountainbeancafe.com",
+    value: "punittomar777@gmail.com",
+    href: "mailto:punittomar777@gmail.com",
   },
 ];
 
@@ -463,6 +468,7 @@ export interface Hours {
   time: string;
 }
 
+// Sample hours to demonstrate the layout — shown with a "sample" label.
 export const openingHours: Hours[] = [
   { days: "Monday – Friday", time: "8:00 AM – 9:00 PM" },
   { days: "Saturday – Sunday", time: "8:00 AM – 10:00 PM" },
@@ -480,6 +486,7 @@ export interface Social {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
+// Placeholder "#" links are hidden in the footer — add real URLs to show them.
 export const socials: Social[] = [
   { label: "Instagram", href: "#", icon: InstagramIcon },
   { label: "Facebook", href: "#", icon: FacebookIcon },

@@ -1,55 +1,26 @@
-import { brand, siteUrl, menu, location } from "../lib/content";
+import { brand, demo, siteUrl } from "../lib/content";
 
 /*
- * Restaurant/CafeOrCoffeeShop structured data for local SEO / rich results.
- * Kept in sync with the visible menu, contact and location details.
+ * WebSite structured data. This is a portfolio demo and Mountain Bean Café is a
+ * fictional restaurant, so we deliberately avoid Restaurant/CafeOrCoffeeShop
+ * schema (address, geo, hours, prices) that would describe a business that
+ * doesn't exist. For a real client, swap this for a Restaurant schema with
+ * their details.
  */
-const prices = menu.flatMap((c) => c.items.map((i) => i.price));
-const inr = new Intl.NumberFormat("en-IN");
-
 const schema = {
   "@context": "https://schema.org",
-  "@type": "CafeOrCoffeeShop",
-  name: brand.full,
-  description:
-    "Mountain Bean Café serves freshly brewed coffee, comforting food and relaxed café experiences in the hills of Landour, Mussoorie.",
+  "@type": "WebSite",
+  name: `${brand.full} — Restaurant Website Demo`,
   url: siteUrl,
-  telephone: "+91-74659-45752",
-  email: "hello@mountainbeancafe.com",
-  servesCuisine: ["Coffee", "Café", "Breakfast", "Continental"],
-  image:
-    "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
-  priceRange: `₹${inr.format(Math.min(...prices))} - ₹${inr.format(
-    Math.max(...prices)
-  )}`,
-  currenciesAccepted: "INR",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "24 Pine View Road",
-    addressLocality: "Landour, Mussoorie",
-    addressRegion: "Uttarakhand",
-    postalCode: "248179",
-    addressCountry: "IN",
+  description:
+    "A portfolio demo website for a fictional café and restaurant, designed and built by Punit Tomar.",
+  inLanguage: "en",
+  creator: {
+    "@type": "Person",
+    name: demo.author,
+    url: demo.authorUrl,
+    sameAs: [demo.portfolioUrl],
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: location.geo.latitude,
-    longitude: location.geo.longitude,
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "08:00",
-      closes: "21:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday", "Sunday"],
-      opens: "08:00",
-      closes: "22:00",
-    },
-  ],
 } as const;
 
 export default function StructuredData() {

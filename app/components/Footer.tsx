@@ -5,9 +5,12 @@ import {
   navLinks,
   socials,
   contactDetails,
-  openingHours,
+  demo,
   whatsappUrl,
 } from "../lib/content";
+
+// Only show socials with a real URL — "#" placeholders are hidden, not linked.
+const activeSocials = socials.filter((social) => social.href !== "#");
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -34,22 +37,24 @@ export default function Footer() {
               Freshly brewed coffee, comforting food and a cozy place to slow
               down — in the hills of Landour, Mussoorie.
             </p>
-            <ul className="mt-6 flex gap-3">
-              {socials.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <li key={social.label}>
-                    <a
-                      href={social.href}
-                      aria-label={social.label}
-                      className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
-                    >
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            {activeSocials.length > 0 && (
+              <ul className="mt-6 flex gap-3">
+                {activeSocials.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <li key={social.label}>
+                      <a
+                        href={social.href}
+                        aria-label={social.label}
+                        className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                      >
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           {/* Nav */}
@@ -74,9 +79,12 @@ export default function Footer() {
           {/* Contact + hours */}
           <div>
             <h2 className="font-display text-sm font-semibold uppercase tracking-widest text-foreground">
-              Visit &amp; contact
+              Contact
             </h2>
-            <ul className="mt-5 space-y-3">
+            <p className="mt-5 text-sm text-subtle">
+              Demo enquiries go to the developer, {demo.author}.
+            </p>
+            <ul className="mt-4 space-y-3">
               {contactDetails.map((item) => (
                 <li key={item.label}>
                   {item.href ? (
@@ -96,17 +104,6 @@ export default function Footer() {
               ))}
             </ul>
 
-            <dl className="mt-5 space-y-1.5 text-sm">
-              {openingHours.map((row) => (
-                <div key={row.days} className="text-muted">
-                  <dt className="inline font-medium text-foreground">
-                    {row.days}:{" "}
-                  </dt>
-                  <dd className="inline">{row.time}</dd>
-                </div>
-              ))}
-            </dl>
-
             <a
               href={whatsappUrl}
               target="_blank"
@@ -124,7 +121,19 @@ export default function Footer() {
             © {year} {brand.full}. All rights reserved.
           </p>
           {/* Right-padded on desktop so the floating WhatsApp button never covers it */}
-          <p className="sm:pr-44">Demo site for portfolio use · Crafted with care.</p>
+          <p className="text-center sm:pr-44 sm:text-right">
+            Demo website — {brand.full} is a fictional restaurant. Designed &amp;
+            built by{" "}
+            <a
+              href={demo.portfolioUrl}
+              target="_blank"
+              rel="noopener"
+              className="text-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+            >
+              {demo.author}
+            </a>
+            .
+          </p>
         </div>
       </div>
     </footer>

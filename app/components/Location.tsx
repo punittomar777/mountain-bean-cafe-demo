@@ -1,11 +1,10 @@
-import { MapPin, Navigation } from "lucide-react";
+import { MapPin } from "lucide-react";
 import SectionHeading from "./ui/SectionHeading";
-import Button from "./ui/Button";
 import {
+  demo,
   location,
   openingHours,
   contactDetails,
-  directionsUrl,
   mapEmbedUrl,
   hoursIcon as HoursIcon,
 } from "../lib/content";
@@ -19,9 +18,9 @@ export default function Location() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           id="location-heading"
-          eyebrow="Find us"
-          title="Up the hill, easy to find."
-          description="We're on Pine View Road in Landour — a short walk from Char Dukan, with parking and shared taxis close by."
+          eyebrow="Location & hours"
+          title="Inspired by the hills of Landour."
+          description="Mountain Bean Café is fictional, so there's no real address to visit. This section shows how a café's map, opening hours and contact details would appear."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
@@ -36,26 +35,13 @@ export default function Location() {
                   <h3 className="font-display text-xl font-semibold text-foreground">
                     {location.name}
                   </h3>
-                  <address className="mt-1 not-italic leading-relaxed text-muted">
-                    {location.addressLines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
+                  <p className="mt-1 leading-relaxed text-muted">
+                    A fictional café set in {location.area} — not a real
+                    address. For a live site, this card holds the address and a
+                    &ldquo;Get Directions&rdquo; link.
+                  </p>
                 </div>
               </div>
-
-              <Button
-                href={directionsUrl}
-                size="md"
-                className="mt-6 w-full sm:w-auto"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Navigation className="h-4 w-4" aria-hidden />
-                Get Directions
-              </Button>
             </div>
 
             {/* Hours */}
@@ -63,9 +49,12 @@ export default function Location() {
               <div className="flex items-center gap-3">
                 <HoursIcon className="h-5 w-5 text-accent" aria-hidden />
                 <h3 className="font-display text-lg font-semibold text-foreground">
-                  Opening hours
+                  Sample opening hours
                 </h3>
               </div>
+              <p className="mt-1 text-sm text-subtle">
+                Shown for demonstration only.
+              </p>
               <dl className="mt-4 space-y-3">
                 {openingHours.map((row) => (
                   <div
@@ -79,41 +68,43 @@ export default function Location() {
               </dl>
             </div>
 
-            {/* Quick contact */}
+            {/* Quick contact — reaches the developer of this demo */}
+            <p className="text-sm text-subtle">
+              Phone and email below reach {demo.author}, the developer of this
+              demo.
+            </p>
             <ul className="grid gap-3 sm:grid-cols-2">
-              {contactDetails
-                .filter((item) => item.label !== "Address")
-                .map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <li key={item.label}>
-                      <a
-                        href={item.href}
-                        className="flex items-center gap-3 rounded-2xl border border-border bg-surface-2 p-4 transition-colors hover:border-accent hover:text-accent"
-                        {...(item.href?.startsWith("http")
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                      >
-                        <Icon className="h-5 w-5 text-accent" aria-hidden />
-                        <span>
-                          <span className="block text-xs uppercase tracking-wider text-subtle">
-                            {item.label}
-                          </span>
-                          <span className="text-sm text-foreground">
-                            {item.value}
-                          </span>
+              {contactDetails.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="flex items-center gap-3 rounded-2xl border border-border bg-surface-2 p-4 transition-colors hover:border-accent hover:text-accent"
+                      {...(item.href?.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                    >
+                      <Icon className="h-5 w-5 text-accent" aria-hidden />
+                      <span>
+                        <span className="block text-xs uppercase tracking-wider text-subtle">
+                          {item.label}
                         </span>
-                      </a>
-                    </li>
-                  );
-                })}
+                        <span className="text-sm text-foreground">
+                          {item.value}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Map */}
           <div className="order-1 overflow-hidden rounded-3xl border border-border bg-surface-2 lg:order-2">
             <iframe
-              title={`Map showing ${location.name} in Landour, Mussoorie`}
+              title={`Map of ${location.area}, the area that inspired this fictional café`}
               src={mapEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

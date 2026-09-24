@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Button from "./ui/Button";
-import { brand, heroTrust } from "../lib/content";
+import { heroTrust } from "../lib/content";
 
 export default function Hero() {
   return (
@@ -16,7 +16,7 @@ export default function Hero() {
           src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=2000&q=80"
           alt="Cosy café interior with warm wooden tables, plants and soft morning light"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />
@@ -27,7 +27,7 @@ export default function Hero() {
       <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-28 sm:px-8 lg:pt-32">
         <div className="max-w-2xl">
           <p className="animate-rise eyebrow text-[#e9c9a8]">
-            Café &amp; Coffee Roastery · Since {brand.since}
+            Café &amp; Coffee Roastery
           </p>
 
           <h1
