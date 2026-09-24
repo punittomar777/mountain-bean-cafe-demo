@@ -54,6 +54,16 @@ export default function Button(props: LinkProps | NativeButtonProps) {
       children,
       ...rest
     } = props;
+    // Same-page anchors use a native <a>: next/link skips the scroll when the
+    // URL already has that hash (e.g. clicking "Reserve a Table" twice), while
+    // the browser re-scrolls and honours CSS smooth scroll + scroll-padding-top.
+    if (rest.href.startsWith("#")) {
+      return (
+        <a className={classes(variant, size, className)} {...rest}>
+          {children}
+        </a>
+      );
+    }
     return (
       <Link className={classes(variant, size, className)} {...rest}>
         {children}
